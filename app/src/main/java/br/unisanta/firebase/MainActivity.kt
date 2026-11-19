@@ -1,5 +1,6 @@
 package br.unisanta.firebase
 
+import android.content.Intent
 import android.os.Bundle
 import android.provider.Browser
 import android.util.Log
@@ -10,9 +11,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.firebase.Firebase
-import com.google.firebase.app
+import br.unisanta.firebase.view.ProdutosActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,8 +30,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        auth = Firebase.auth
+
         if (auth.currentUser != null) {
-            //todo: enviar para a próxima tela
+            val intent = Intent(this, ProdutosActivity::class.java)
+            startActivity(intent)
         }
 
 
@@ -67,7 +72,8 @@ class MainActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Log.d("FIREBASE", "signInWithEmail:success")
 
-                        //todo: enviar para a próxima tela
+                        val intent = Intent(this, ProdutosActivity::class.java)
+                        startActivity(intent)
                     } else {
                         Log.w("FIREBASE", "signInWithEmail:failure", task.exception)
                         Toast.makeText(
@@ -93,7 +99,8 @@ class MainActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT,
                         ).show()
 
-                        //todo: enviar para a próxima tela
+                        val intent = Intent(this, ProdutosActivity::class.java)
+                        startActivity(intent)
                     } else {
                         Log.w("FIREBASE", "signInWithEmail:failure", task.exception)
                         Toast.makeText(
